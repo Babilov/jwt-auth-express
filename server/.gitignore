@@ -1,0 +1,42 @@
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache/
+
+# Optional bower package directory
+bower_components/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment variables file
+.env
+
+# Log files
+*.log
+
+# Cache files
+.cache/
+
+# Build output
+/build/
+/dist/
+
+# IDE and editor files
+.idea/
+.vscode/
+
+# Temporary files
+*.tmp
+
+# Compiled binary addons (if any)
+*.node
+
+# Dependency lock files
+package-lock.json
+yarn.lock
