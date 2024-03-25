@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.js");
 const userUtils = require("../utils/UserUtils.js");
-const getRole = require("../utils/roleUtils.js");
+const roleUtils = require("../utils/RoleUtils.js");
 const errors = require("../utils/consts/errorConsts.js");
 const roles = require("../utils/consts/rolesConsts.js");
 
@@ -13,7 +13,7 @@ class UserController {
   async register(req, res) {
     const username = req.body.username;
     const password = await bcrypt.hash(req.body.password, 5);
-    const userRole = await getRole(ROLE_USER);
+    const userRole = await roleUtils.getRole(ROLE_USER);
     const user = await userUtils.getUserByUsername(username);
     if (user) {
       return res.status(403).send({ error: errors.ERROR_USER_EXISTS });

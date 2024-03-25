@@ -10,10 +10,7 @@ class PostController {
   async createPost(req, res) {
     const UserId = req.user.id;
     const content = req.body.content; // получаем контент поста
-    const user = userUtils.getUserById(UserId);
-    if (!user) {
-      return res.status(401).send({ error: errors.ERROR_NO_SUCH_USER });
-    }
+    await userUtils.isUser(res, UserId);
     try {
       const post = await Post.create({ content, UserId });
       res.status(200).send(post);

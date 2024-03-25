@@ -12,6 +12,9 @@ const errors = {
   ERROR_WRONG_LOGIN_SIZE: "Логин должен быть 4-20 символов",
   ERROR_WRONG_USER: "Вы не создатель поста",
   ERROR_NO_SUCH_POST: "Нет такого поста",
+  ERROR_BAD_SUBSCRIPTION: "Вы не можете подписаться на самого себя",
+  ERROR_DUBLE_SUBSCRIPTION:
+    "Вы не можете подписаться на одного человека дважды",
 };
 
 module.exports = errors;

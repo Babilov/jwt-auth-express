@@ -21,4 +21,18 @@ const User = db.define("User", {
 
 User.hasMany(Post);
 
+User.belongsToMany(User, {
+  as: "Subscribers",
+  through: "Subscription",
+  foreignKey: "subscribeeId",
+  otherKey: "subscriberId",
+});
+
+User.belongsToMany(User, {
+  as: "Subscribees",
+  through: "Subscription",
+  foreignKey: "subscriberId",
+  otherKey: "subscribeeId",
+});
+
 module.exports = User;
