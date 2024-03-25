@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.js");
-const getUser = require("../utils/userUtils.js");
+const userUtils = require("../utils/userUtils.js");
 const getRole = require("../utils/roleUtils.js");
 const errors = require("../utils/consts/errorConsts.js");
 const roles = require("../utils/consts/rolesConsts.js");
@@ -14,7 +14,7 @@ class UserController {
     const username = req.body.username;
     const password = await bcrypt.hash(req.body.password, 5);
     const userRole = await getRole(ROLE_USER);
-    const user = await getUser(username);
+    const user = await userUtils.getUserByUsername(username);
     if (user) {
       return res.status(403).send({ error: errors.ERROR_USER_EXISTS });
     }
@@ -32,14 +32,15 @@ class UserController {
 
   async login(req, res) {
     const { username, password } = req.body; // получить из json
-    const user = await getUser(username); // юзер из базы данных, если такой есть
+    const user = await userUtils.getUserByUsername(username); // юзер из базы данных, если такой есть
     if (!user) {
       return res.status(401).send({ error: errors.ERROR_NO_SUCH_USER });
     }
     try {
       if (await bcrypt.compare(password, user.password)) {
         const RoleId = user.RoleId;
-        const token = jwt.sign({ username, RoleId }, SECKRET_KEY, {
+        const id = user.id;
+        const token = jwt.sign({ id, username, RoleId }, SECKRET_KEY, {
           expiresIn: "24h",
         });
         return res.status(200).send({ token });

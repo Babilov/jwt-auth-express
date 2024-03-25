@@ -1,13 +1,13 @@
 const express = require("express");
 const roleController = require("../controllers/RoleControllers.js");
-const verifyToken = require("../midleware/verifyToken.js");
+const isAuthed = require("../midleware/isAuthed.js");
 const isAdminMidleware = require("../midleware/isAdminMidleware.js");
 
 const router = express.Router();
 
 router.get(
   "/get_roles",
-  verifyToken,
+  isAuthed,
   isAdminMidleware,
   roleController.getAllRoles
 );

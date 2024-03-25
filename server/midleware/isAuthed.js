@@ -3,7 +3,7 @@ const errors = require("../utils/consts/errorConsts");
 
 const SECKRET_KEY = process.env.SECKRET_KEY;
 
-const verifyToken = (req, res, next) => {
+const isAuthed = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader.split(" ")[1];
   if (!token) {
@@ -16,4 +16,4 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-module.exports = verifyToken;
+module.exports = isAuthed;

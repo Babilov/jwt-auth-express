@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //Routes
-app.use("/", router);
+app.use("/api", router);
 
 //Start func
 const start = async () => {
