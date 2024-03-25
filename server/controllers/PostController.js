@@ -33,33 +33,27 @@ class PostController {
     }
   }
 
+  async updatePost(req, res) {
+    const { content } = req.body;
+    const { postId } = req.query;
+    try {
+      const post = await postUtils.getPost(postId);
+      const newPost = await post.update({ content });
+      return res.status(200).send(newPost);
+    } catch (e) {
+      return res.status(500).send({ error: errors.ERROR_SERVER });
+    }
+  }
+
   async deletePost(req, res) {
     const { postId } = req.query;
     const post = await postUtils.getPost(postId);
-    if (!postId || !post) {
-      return res.status(404).send({ error: errors.ERROR_NO_SUCH_POST });
-    }
     try {
       await post.destroy();
       return res.status(200).send({ deleted: post });
     } catch (e) {
       return res.status(500).send({ error: errors.ERROR_SERVER });
     }
-  }
-
-  async updatePost(req, res) {
-    const { content } = req.body;
-    const { postId } = req.query;
-    if (postId) {
-      try {
-        const post = await postUtils.getPost(postId);
-        const newPost = await post.update({ content });
-        return res.status(200).send(newPost);
-      } catch (e) {
-        return res.status(500).send({ error: errors.ERROR_SERVER });
-      }
-    }
-    return res.status(404).send({ error: errors.ERROR_NO_SUCH_POST });
   }
 }
 module.exports = new PostController();

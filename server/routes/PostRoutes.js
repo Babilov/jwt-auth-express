@@ -1,9 +1,11 @@
 const express = require("express");
 const { body } = require("express-validator");
-const hasErrorsMidleware = require("../midleware/hasErrorsMidleware.js");
+const hasErrorsMidleware = require("../midleware/errorsMidleware/hasErrorsMidleware.js");
 const postController = require("../controllers/PostController.js");
-const isAuthedMidleware = require("../midleware/isAuthedMidleware.js");
-const isPostOwnerMidlewareOrAdmin = require("../midleware/isPostOwnerMidlewareOrAdmin.js");
+const isAuthedMidleware = require("../midleware/authMidleware/isAuthedMidleware.js");
+const isPostMidleware = require("../midleware/postMidleware/isPostMidleware.js");
+const queryHasPostIdMidleware = require("../midleware/postMidleware/queryHasPostIdMidleware.js");
+const isPostOwnerMidlewareOrAdmin = require("../midleware/postMidleware/isPostOwnerMidlewareOrAdmin.js");
 const errors = require("../utils/consts/errorConsts.js");
 
 const router = express.Router();
@@ -16,18 +18,21 @@ router.post(
   hasErrorsMidleware,
   postController.createPost
 );
-router.delete(
-  "/",
-  isAuthedMidleware,
-  isPostOwnerMidlewareOrAdmin,
-  postController.deletePost
-);
 
 router.patch(
   "/",
   isAuthedMidleware,
+  queryHasPostIdMidleware,
   isPostOwnerMidlewareOrAdmin,
   postController.updatePost
+);
+
+router.delete(
+  "/",
+  isAuthedMidleware,
+  isPostMidleware,
+  isPostOwnerMidlewareOrAdmin,
+  postController.deletePost
 );
 
 module.exports = router;

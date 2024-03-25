@@ -1,6 +1,6 @@
-const errors = require("../utils/consts/errorConsts.js");
-const postUtils = require("../utils/PostUtils.js");
-const userUtils = require("../utils/UserUtils.js");
+const errors = require("../../utils/consts/errorConsts.js");
+const postUtils = require("../../utils/PostUtils.js");
+const userUtils = require("../../utils/UserUtils.js");
 
 const isPostOwnerMidleware = async (req, res, next) => {
   const { postId } = req.query;

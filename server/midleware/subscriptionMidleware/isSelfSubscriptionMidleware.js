@@ -1,4 +1,4 @@
-const errors = require("../utils/consts/errorConsts.js");
+const errors = require("../../utils/consts/errorConsts.js");
 
 const isSelfSubscriptionMidleware = (req, res, next) => {
   const subscriberId = req.user.id;

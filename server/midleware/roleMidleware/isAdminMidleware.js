@@ -1,6 +1,5 @@
-const { modes } = require("tar");
-const errors = require("../utils/consts/errorConsts.js");
-const userUtils = require("../utils/UserUtils.js");
+const errors = require("../../utils/consts/errorConsts.js");
+const userUtils = require("../../utils/UserUtils.js");
 
 const isAdminMidleware = (req, res, next) => {
   if (!userUtils.checkAdmin(req.user)) {

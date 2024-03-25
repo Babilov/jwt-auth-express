@@ -1,5 +1,5 @@
-const Subscription = require("../models/Subscription.js");
-const errors = require("../utils/consts/errorConsts.js");
+const Subscription = require("../../models/Subscription.js");
+const errors = require("../../utils/consts/errorConsts.js");
 
 const isExistingSubscriptionMidleware = async (req, res, next) => {
   const subscriberId = req.user.id;

@@ -15,6 +15,7 @@ const errors = {
   ERROR_BAD_SUBSCRIPTION: "Вы не можете подписаться на самого себя",
   ERROR_DUBLE_SUBSCRIPTION:
     "Вы не можете подписаться на одного человека дважды",
+  ERRROR_NO_SUCH_SUBSCRIBPTION: "Вы не подписаны на этого пользователя",
 };
 
 module.exports = errors;
