@@ -1,19 +1,33 @@
 const express = require("express");
 const { body } = require("express-validator");
 const hasErrorsMidleware = require("../midleware/hasErrorsMidleware.js");
-const PostController = require("../controllers/PostController.js");
-const isAuthed = require("../midleware/isAuthed.js");
+const postController = require("../controllers/PostController.js");
+const isAuthedMidleware = require("../midleware/isAuthedMidleware.js");
+const isPostOwnerMidlewareOrAdmin = require("../midleware/isPostOwnerMidlewareOrAdmin.js");
 const errors = require("../utils/consts/errorConsts.js");
 
 const router = express.Router();
 
-router.get("/", (req, res) => console.log("message"));
+router.get("/", isAuthedMidleware, postController.getPosts);
 router.post(
   "/",
-  isAuthed,
+  isAuthedMidleware,
   [body("content").isLength({ min: 4 }).withMessage(errors.ERROR_SHORT_POST)],
   hasErrorsMidleware,
-  PostController.createPost
+  postController.createPost
+);
+router.delete(
+  "/",
+  isAuthedMidleware,
+  isPostOwnerMidlewareOrAdmin,
+  postController.deletePost
+);
+
+router.patch(
+  "/",
+  isAuthedMidleware,
+  isPostOwnerMidlewareOrAdmin,
+  postController.updatePost
 );
 
 module.exports = router;

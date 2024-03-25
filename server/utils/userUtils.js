@@ -7,6 +7,13 @@ class UserUtils {
   async getUserById(id) {
     return await User.findOne({ where: { id } });
   }
+
+  checkAdmin(user) {
+    if (!user || user.RoleId !== 2) {
+      return false;
+    }
+    return true;
+  }
 }
 
 module.exports = new UserUtils();
