@@ -1,5 +1,6 @@
 const Subscription = require("../../models/Subscription.js");
 const errors = require("../../utils/consts/errorConsts.js");
+const ApiError = require("../../error/ApiError.js");
 
 const isSubscribtionMidleware = async (req, res, next) => {
   const subscriberId = req.user.id;
@@ -13,7 +14,7 @@ const isSubscribtionMidleware = async (req, res, next) => {
   if (existingSubscription) {
     return next();
   }
-  return res.status(403).send({ error: errors.ERRROR_NO_SUCH_SUBSCRIBPTION });
+  return next(ApiError.forbidden(ERROR_NO_SUCH_SUBSCRIBPTION));
 };
 
 module.exports = isSubscribtionMidleware;

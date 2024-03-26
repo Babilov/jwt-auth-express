@@ -1,11 +1,12 @@
 const errors = require("../../utils/consts/errorConsts.js");
 const userUtils = require("../../utils/UserUtils.js");
+const ApiError = require("../../error/ApiError.js");
 
 const isAdminMidleware = (req, res, next) => {
   if (!userUtils.checkAdmin(req.user)) {
-    return res.status(403).send({ error: errors.ERROR_NO_ACCESS });
+    return next(ApiError.forbidden(errors.ERROR_NO_ACCESS));
   } else {
-    next();
+    return next();
   }
 };
 

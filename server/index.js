@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const db = require("./db.js");
 const router = require("./routes/combineRouter.js");
+const errorMidleware = require("./midleware/errorsMidleware/errorMidleware.js");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //Routes
 app.use("/api", router);
+app.use(errorMidleware);
 
 //Start func
 const start = async () => {

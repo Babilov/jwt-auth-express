@@ -7,7 +7,7 @@ const subscriptionRouter = require("./subscriptionRouter.js");
 
 router.use("/auth", userRouter);
 router.use("/role", roleRouter);
-router.use("/posts", postsRouter);
+router.use("/post", postsRouter);
 router.use("/subscription", subscriptionRouter);
 
 module.exports = router;

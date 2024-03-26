@@ -1,5 +1,6 @@
 const Subscription = require("../../models/Subscription.js");
 const errors = require("../../utils/consts/errorConsts.js");
+const ApiError = require("../../error/ApiError.js");
 
 const isExistingSubscriptionMidleware = async (req, res, next) => {
   const subscriberId = req.user.id;
@@ -11,7 +12,7 @@ const isExistingSubscriptionMidleware = async (req, res, next) => {
     },
   });
   if (existingSubscription) {
-    return res.status(403).send({ error: errors.ERROR_DUBLE_SUBSCRIPTION });
+    return next(ApiError.forbidden(errors.ERROR_DUBLE_SUBSCRIPTION));
   }
   return next();
 };

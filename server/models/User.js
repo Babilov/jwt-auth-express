@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db.js");
 const Post = require("./Post.js");
+const Comment = require("./Comment.js");
 
 const User = db.define("User", {
   id: {
@@ -20,17 +21,18 @@ const User = db.define("User", {
 });
 
 User.hasMany(Post);
+User.hasMany(Comment, { as: "comments" });
 
 User.belongsToMany(User, {
   as: "Subscribers",
-  through: "Subscription",
+  through: "Subscriptions", // добавить s, так как имя таблицы во множественном числе
   foreignKey: "subscribeeId",
   otherKey: "subscriberId",
 });
 
 User.belongsToMany(User, {
   as: "Subscribees",
-  through: "Subscription",
+  through: "Subscriptions",
   foreignKey: "subscriberId",
   otherKey: "subscribeeId",
 });

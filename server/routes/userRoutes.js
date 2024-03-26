@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
-const User = require("../models/User.js");
-const Role = require("../models/Role.js");
 const userController = require("../controllers/UserController.js");
 const hasErrorsMidleware = require("../midleware/errorsMidleware/hasErrorsMidleware.js");
 const errors = require("../utils/consts/errorConsts.js");
