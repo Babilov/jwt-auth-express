@@ -23,7 +23,7 @@ class ApiError extends Error {
     return new ApiError(404, message);
   }
 
-  static iternal() {
+  static internal() {
     return new ApiError(500, errors.ERROR_SERVER);
   }
 }

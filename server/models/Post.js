@@ -14,6 +14,6 @@ const Post = db.define("Post", {
   },
 });
 
-Post.hasMany(Comment, { as: "comments" });
+Post.hasMany(Comment, { as: "Comments" });
 
 module.exports = Post;

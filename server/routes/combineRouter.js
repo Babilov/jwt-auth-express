@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const userRouter = require("./userRoutes.js");
-const roleRouter = require("./roleRoutes.js");
-const postsRouter = require("./postRoutes.js");
-const subscriptionRouter = require("./subscriptionRouter.js");
+const userRouter = require("./usersRoutes.js");
+const roleRouter = require("./rolesRoutes.js");
+const postsRouter = require("./postsRoutes.js");
+const subscriptionRouter = require("./subscriptionsRouter.js");
+const commetssRouter = require("./commentsRoute.js");
 
 router.use("/auth", userRouter);
-router.use("/role", roleRouter);
-router.use("/post", postsRouter);
+router.use("/roles", roleRouter);
+router.use("/posts", postsRouter);
 router.use("/subscription", subscriptionRouter);
+router.use("/comments", commetssRouter);
 
 module.exports = router;

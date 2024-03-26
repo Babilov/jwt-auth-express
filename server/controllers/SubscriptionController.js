@@ -38,7 +38,7 @@ class SubscriptionController {
       const user = await User.findOne({ where: { id } });
       res.status(200).send({ subsctiber: await user.getSubscribers() });
     } catch (e) {
-      next(ApiError.iternal);
+      next(ApiError.internal());
     }
   }
 }

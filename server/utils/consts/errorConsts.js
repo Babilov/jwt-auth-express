@@ -12,12 +12,15 @@ const errors = {
   ERROR_WRONG_LOGIN_SIZE: "Логин должен быть 4-20 символов",
   ERROR_WRONG_USER: "Вы не создатель поста",
   ERROR_NO_SUCH_POST: "Нет такого поста",
+  ERROR_NO_SUCH_COMMENT: "Нет такого комментария",
   ERROR_BAD_SUBSCRIPTION: "Вы не можете подписаться на самого себя",
   ERROR_DUBLE_SUBSCRIPTION:
     "Вы не можете подписаться на одного человека дважды",
   ERROR_NO_SUCH_SUBSCRIBPTION: "Вы не подписаны на этого пользователя",
-  ERROR_NO_ID_QUERY: "Не указано id пользователя",
+  ERROR_NO_USER_ID_QUERY: "Не указано id пользователя",
+  ERROR_NO_POST_ID_QUERY: "Не указано id поста",
   ERROR_UNCATCHED_ERROR: "Непредвиденная ошибка!",
+  ERROR_NOT_COMMENT_OWNER: "Вы не можете изменить чужой пост",
 };
 
 module.exports = errors;
