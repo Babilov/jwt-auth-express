@@ -25,6 +25,12 @@ router.patch(
   "/:commentId",
   isAuthed,
   isCommentAuthorMidleware,
+  [
+    body("content")
+      .notEmpty()
+      .withMessage("Изменения должны содержать символы"),
+  ],
+  hasErrorsMidleware,
   commentController.updateCommentById
 );
 router.delete(

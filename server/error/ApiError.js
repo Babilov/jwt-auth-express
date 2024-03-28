@@ -12,7 +12,7 @@ class ApiError extends Error {
   }
 
   static badRequest(message) {
-    return new ApiError(400, message);
+    return new ApiError(401, message);
   }
 
   static forbidden(message) {

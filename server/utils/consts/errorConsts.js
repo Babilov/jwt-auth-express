@@ -21,6 +21,7 @@ const errors = {
   ERROR_NO_POST_ID_QUERY: "Не указано id поста",
   ERROR_UNCATCHED_ERROR: "Непредвиденная ошибка!",
   ERROR_NOT_COMMENT_OWNER: "Вы не можете изменить чужой пост",
+  ERROR_BAD_QUERY: "Указаны неверные query-параметры",
 };
 
 module.exports = errors;

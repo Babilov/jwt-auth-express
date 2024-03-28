@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
 const db = require("./db.js");
 const router = require("./routes/combineRouter.js");
 const errorMidleware = require("./midleware/errorsMidleware/errorMidleware.js");
@@ -15,6 +17,8 @@ app.get("/", (req, res) => {
 
 //Midleware
 app.use(express.json());
+app.use(express.static(path.resolve(__dirname, "static")));
+app.use(fileUpload({}));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //Routes

@@ -1,9 +1,10 @@
 const express = require("express");
-const router = express.Router();
 const { body } = require("express-validator");
 const userController = require("../controllers/UserController.js");
 const hasErrorsMidleware = require("../midleware/errorsMidleware/hasErrorsMidleware.js");
 const errors = require("../utils/consts/errorConsts.js");
+
+const router = express.Router();
 
 router.post(
   "/register",
@@ -12,7 +13,6 @@ router.post(
       .isLength({ min: 4, max: 20 })
       .withMessage(errors.ERROR_WRONG_LOGIN_SIZE),
     body("password")
-      .notEmpty()
       .isLength({ min: 6 })
       .withMessage(errors.ERROR_SHORT_PASSWORD),
   ],

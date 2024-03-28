@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db.js");
 const Post = require("./Post.js");
+const Like = require("./Like.js");
 const Comment = require("./Comment.js");
 
 const User = db.define("User", {
@@ -17,6 +18,11 @@ const User = db.define("User", {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  avatar: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: "",
   },
 });
 
@@ -35,6 +41,10 @@ User.belongsToMany(User, {
   through: "Subscriptions",
   foreignKey: "subscriberId",
   otherKey: "subscribeeId",
+});
+
+User.hasMany(Like, {
+  as: "Likes",
 });
 
 module.exports = User;
