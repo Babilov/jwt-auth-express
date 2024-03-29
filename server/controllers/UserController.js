@@ -42,7 +42,7 @@ class UserController {
     const { username, password } = req.body; // получить из json
     const user = await userUtils.getUserByUsername(username); // юзер из базы данных, если такой есть
     if (!user) {
-      return res.status(401).send({ error: errors.ERROR_NO_SUCH_USER });
+      return res.status(404).send({ error: errors.ERROR_NO_SUCH_USER });
     }
     try {
       if (await bcrypt.compare(password, user.password)) {
