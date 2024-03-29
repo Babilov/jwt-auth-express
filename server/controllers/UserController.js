@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const uuid = require("uuid");
-const path = require("path");
+// const uuid = require("uuid");
+// const path = require("path");
 const User = require("../models/User.js");
 const userUtils = require("../utils/UserUtils.js");
 const roleUtils = require("../utils/RoleUtils.js");
@@ -14,9 +14,9 @@ const SECKRET_KEY = process.env.SECKRET_KEY;
 class UserController {
   async register(req, res) {
     const { username } = req.body;
-    const { avatar } = req.files;
-    let fileName = uuid.v4() + ".jpg";
-    avatar.mv(path.resolve(__dirname, "..", "static", fileName));
+    // const { avatar } = req.files;
+    // let fileName = uuid.v4() + ".jpg";
+    // avatar.mv(path.resolve(__dirname, "..", "static", fileName));
     const password = await bcrypt.hash(req.body.password, 5);
     const userRole = await roleUtils.getRole(ROLE_USER);
     const user = await userUtils.getUserByUsername(username);
@@ -29,7 +29,7 @@ class UserController {
         username,
         password,
         RoleId: userRole.id,
-        avatar: fileName,
+        //  avatar: fileName,
       });
 
       return res.status(201).send(user);
