@@ -10,7 +10,7 @@ export const useLogin = () => {
       setError(null);
       const { token } = res.data;
       localStorage.setItem("token", token);
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       handleLoginError(error, setError);
     }
