@@ -20,13 +20,15 @@ class PostController {
   }
 
   async getPosts(req, res) {
+    /*
     const UserId = req.query.user; // получаем id пользователя
     const postId = req.query.postId; // получаем id поста
     let posts;
-    let whereCondition = conditions.buildWhereCondition(UserId, postId);
+    let whereCondition = conditions.buildWhereCondition(UserId, postId); */
+    const UserId = req.user.id;
 
     try {
-      posts = await Post.findAll({ where: whereCondition });
+      const posts = await Post.findAll({ where: { UserId } });
       res.status(200).send(posts);
     } catch (e) {
       res.status(500).send(errors.ERROR_SERVER);

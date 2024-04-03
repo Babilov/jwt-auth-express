@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 // const uuid = require("uuid");
 // const path = require("path");
 const User = require("../models/User.js");
@@ -7,6 +8,7 @@ const userUtils = require("../utils/UserUtils.js");
 const roleUtils = require("../utils/RoleUtils.js");
 const errors = require("../utils/consts/errorConsts.js");
 const roles = require("../utils/consts/rolesConsts.js");
+const ApiError = require("../error/ApiError.js");
 
 const ROLE_USER = roles.USER;
 const SECKRET_KEY = process.env.SECKRET_KEY;
@@ -48,7 +50,8 @@ class UserController {
       if (await bcrypt.compare(password, user.password)) {
         const RoleId = user.RoleId;
         const id = user.id;
-        const token = jwt.sign({ id, username, RoleId }, SECKRET_KEY, {
+        const avatar = user.avatar;
+        const token = jwt.sign({ id, username, RoleId, avatar }, SECKRET_KEY, {
           expiresIn: "24h",
         });
         return res.status(200).send({ token });
@@ -57,6 +60,41 @@ class UserController {
       }
     } catch (e) {
       return res.status(500).send({ error: errors.ERROR_SERVER });
+    }
+  }
+
+  async getUser(req, res) {
+    const token = req.headers.authorization.split(" ")[1];
+    jwt.verify(token, process.env.SECKRET_KEY, (err, decoded) => {
+      if (err) {
+        return ApiError.unauthorized({ error: errors.ERROR_NOT_AUTHED });
+      }
+      const userData = {
+        username: decoded.username,
+        avatar: decoded.avatar,
+      };
+      return res.status(200).send(userData);
+    });
+  }
+
+  async setProfileDescription(req, res) {
+    const { user } = req;
+    const { description } = req.body;
+    try {
+      const changedDescription = await user.update({ description });
+      return res.status(200).send({ changedDescription });
+    } catch (e) {
+      return ApiError.internal({ error: errors.ERROR_SERVER });
+    }
+  }
+
+  async getUserById(req, res) {
+    const { id } = req.params;
+    try {
+      const user = await User.findOne({ where: { id } });
+      return res.status(200).send(user);
+    } catch (e) {
+      return ApiError.badRequest({ error: errors.ERROR_NO_SUCH_USER });
     }
   }
 }

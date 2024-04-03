@@ -9,7 +9,7 @@ export const useLogin = () => {
       const res = await sendLoginRequest(username, password);
       setError(null);
       const { token } = res.data;
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", `Bearer ${token}`);
       navigate("/profile");
     } catch (error) {
       handleLoginError(error, setError);

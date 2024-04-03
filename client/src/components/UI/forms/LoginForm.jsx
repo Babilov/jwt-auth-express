@@ -1,7 +1,7 @@
 import { Paper, Typography } from "@mui/material";
 import React, { useState } from "react";
 import MyInput from "../inputs/MyIunput";
-import MyButton from "../buttons/MyButton";
+import LoginButton from "../buttons/LoginButton.jsx";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -24,9 +24,13 @@ const LoginForm = () => {
           setState={setPassword}
         />
         <Typography>{error}</Typography>
-        <MyButton username={username} password={password} setError={setError}>
+        <LoginButton
+          username={username}
+          password={password}
+          setError={setError}
+        >
           Войти
-        </MyButton>
+        </LoginButton>
       </form>
     </Paper>
   );

@@ -1,0 +1,10 @@
+.modal {
+    width: 50vw;
+    height: 50vh;
+    margin: auto;
+}
+
+.div {
+    background-color: aliceblue;
+    padding: 5px;
+}

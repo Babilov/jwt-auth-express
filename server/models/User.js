@@ -19,6 +19,11 @@ const User = db.define("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  profileDescription: {
+    type: DataTypes.STRING,
+    defaultValue: "",
+    allowNull: true,
+  },
   avatar: {
     type: DataTypes.STRING,
     allowNull: true,
@@ -26,7 +31,7 @@ const User = db.define("User", {
   },
 });
 
-User.hasMany(Post);
+User.hasMany(Post, { as: "Posts" });
 User.hasMany(Comment, { as: "comments" });
 
 User.belongsToMany(User, {
