@@ -33,10 +33,9 @@ class SubscriptionController {
   }
 
   async getSubscripitonsById(req, res, next) {
-    const { id } = req.query;
     try {
-      const user = await User.findOne({ where: { id } });
-      res.status(200).send({ subsctiber: await user.getSubscribers() });
+      const { user } = req;
+      res.status(200).send({ subsctibers: await user.getSubscribers() });
     } catch (e) {
       next(ApiError.internal());
     }

@@ -3,7 +3,7 @@ const db = require("../db.js");
 
 const Like = db.define("Like", {
   entity: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   entity_id: {

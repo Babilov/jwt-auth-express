@@ -26,13 +26,26 @@ class LikeController {
   }
 
   async getLikeByUserId(req, res, next) {
-    const { user_id } = req.query;
+    const { user } = req;
     try {
-      const user = await User.findOne({ where: { id: user_id } });
       return res.status(200).send(await user.getLikes());
     } catch (e) {
       next(ApiError.notFound(errors.ERROR_NO_SUCH_USER));
     }
+  }
+
+  async getLikesOfEntity(req, res, next) {
+    const { entity, entity_id } = req.query;
+    try {
+      const likes = await Like.findAll({ where: { entity, entity_id } });
+      return res.status(200).send(likes);
+    } catch (e) {
+      return next(ApiError.badRequest({ error: errors.ERROR_BAD_QUERY }));
+    }
+  }
+
+  async isLiked(req, res, next) {
+    return res.status(200).send(req.like);
   }
 }
 

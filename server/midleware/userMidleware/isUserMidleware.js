@@ -8,6 +8,7 @@ const isUserMidleware = async (req, res, next) => {
   if (!user) {
     return next(ApiError.notFound(errors.ERROR_NO_SUCH_USER));
   }
+  req.user = user;
   return next();
 };
 
