@@ -29,7 +29,7 @@ const LikeButton = ({ post }) => {
   };
 
   return (
-    <div className={styles.likePlaceholder}>
+    <div className={styles.buttonPlaceholder}>
       {isLoaded && (
         <IconButton
           disableRipple

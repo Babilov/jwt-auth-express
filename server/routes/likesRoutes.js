@@ -17,7 +17,12 @@ router.post(
   likeController.setOrRemoveLike
 );
 
-router.get("/", isGoodQueryForLikeMidleware, likeController.getLikesOfEntity);
+router.get(
+  "/",
+  isGoodQueryForLikeMidleware,
+  isLikedMidleware,
+  likeController.getLikesOfEntity
+);
 
 router.get(
   "/userLikes",

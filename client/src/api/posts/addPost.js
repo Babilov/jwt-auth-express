@@ -1,8 +1,7 @@
 import axios from "axios";
 
-export const addPost = async (setPosts, setOpen, content) => {
+export const addPost = async (content, setPosts) => {
   const token = localStorage.getItem("token");
-  setOpen(false);
   try {
     const res = await axios.post(
       `${process.env.REACT_APP_API_URL}posts`,

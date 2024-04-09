@@ -1,6 +1,6 @@
 import { Paper, Typography } from "@mui/material";
 import React, { useState } from "react";
-import MyInput from "../inputs/MyIunput";
+import MyInput from "../inputs/MyInput.jsx";
 import LoginButton from "../buttons/LoginButton.jsx";
 
 const LoginForm = () => {

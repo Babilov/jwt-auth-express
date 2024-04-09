@@ -14,7 +14,7 @@ router.get("/", isAuthedMidleware, postController.getPosts);
 router.post(
   "/",
   isAuthedMidleware,
-  [body("content").isLength({ min: 4 }).withMessage(errors.ERROR_SHORT_POST)],
+  [body("content").notEmpty().withMessage(errors.ERROR_SHORT_POST)],
   hasErrorsMidleware,
   postController.createPost
 );

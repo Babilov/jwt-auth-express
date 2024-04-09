@@ -25,7 +25,7 @@ class PostController {
     const postId = req.query.postId; // получаем id поста
     let posts;
     let whereCondition = conditions.buildWhereCondition(UserId, postId); */
-    const UserId = req.user.id;
+    const UserId = req.query.id;
 
     try {
       const posts = await Post.findAll({ where: { UserId } });

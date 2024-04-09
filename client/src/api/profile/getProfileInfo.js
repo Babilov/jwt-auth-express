@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getProfileInfo = async () => {
+export const getProfileInfo = async (id) => {
   const token = localStorage.getItem("token").split(" ")[1];
   try {
     const userData = await axios.get(

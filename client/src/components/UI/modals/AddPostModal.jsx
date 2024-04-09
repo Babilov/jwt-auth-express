@@ -1,6 +1,6 @@
 import { Modal } from "@mui/material";
 import React, { useState } from "react";
-import MyInput from "../inputs/MyIunput";
+import MyInput from "../inputs/MyInput";
 import MyButton from "../buttons/MyButton";
 import { addPost } from "../../../api/posts/addPost";
 

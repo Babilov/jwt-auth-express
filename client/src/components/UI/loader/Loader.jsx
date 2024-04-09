@@ -7,7 +7,7 @@ const Loader = () => {
       container
       justifyContent="center"
       alignItems="center"
-      style={{ height: "100vh" }}
+      style={{ height: "70vh" }}
     >
       <CircularProgress />
     </Grid>

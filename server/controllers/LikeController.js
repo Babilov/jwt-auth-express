@@ -38,7 +38,7 @@ class LikeController {
     const { entity, entity_id } = req.query;
     try {
       const likes = await Like.findAll({ where: { entity, entity_id } });
-      return res.status(200).send(likes);
+      return res.status(200).send({ likes, isLiked: !!req.like });
     } catch (e) {
       return next(ApiError.badRequest({ error: errors.ERROR_BAD_QUERY }));
     }

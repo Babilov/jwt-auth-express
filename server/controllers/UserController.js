@@ -11,7 +11,7 @@ const roles = require("../utils/consts/rolesConsts.js");
 const ApiError = require("../error/ApiError.js");
 
 const ROLE_USER = roles.USER;
-const SECKRET_KEY = process.env.SECKRET_KEY;
+const SECRET_KEY = process.env.SECRET_KEY;
 
 class UserController {
   async register(req, res) {
@@ -51,10 +51,10 @@ class UserController {
         const RoleId = user.RoleId;
         const id = user.id;
         const avatar = user.avatar;
-        const token = jwt.sign({ id, username, RoleId, avatar }, SECKRET_KEY, {
+        const token = jwt.sign({ id, username, RoleId, avatar }, SECRET_KEY, {
           expiresIn: "24h",
         });
-        return res.status(200).send({ token });
+        return res.status(200).send({ token, id });
       } else {
         return res.status(403).send({ error: errors.ERROR_WRONG_PASSWORD });
       }
@@ -65,11 +65,12 @@ class UserController {
 
   async getUser(req, res) {
     const token = req.headers.authorization.split(" ")[1];
-    jwt.verify(token, process.env.SECKRET_KEY, (err, decoded) => {
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
       if (err) {
         return ApiError.unauthorized({ error: errors.ERROR_NOT_AUTHED });
       }
       const userData = {
+        id: decoded.id,
         username: decoded.username,
         avatar: decoded.avatar,
       };
@@ -92,6 +93,7 @@ class UserController {
     const { id } = req.params;
     try {
       const user = await User.findOne({ where: { id } });
+      console.log(user);
       return res.status(200).send(user);
     } catch (e) {
       return ApiError.badRequest({ error: errors.ERROR_NO_SUCH_USER });

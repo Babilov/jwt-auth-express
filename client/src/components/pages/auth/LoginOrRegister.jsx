@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import LoginForm from "../UI/forms/LoginForm";
 import style from "./styles/style.module.css";
+import LoginForm from "../../UI/forms/LoginForm";
 
 const LoginOrRegister = () => {
   return (

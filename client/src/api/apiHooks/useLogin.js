@@ -1,16 +1,21 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentUserId } from "../../store/reducers/userReducer";
 
 export const useLogin = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const login = async (username, password, setError) => {
     try {
       const res = await sendLoginRequest(username, password);
       setError(null);
-      const { token } = res.data;
+      console.log(res.data);
+      const { token, id } = res.data;
+      dispatch(setCurrentUserId(id));
       localStorage.setItem("token", `Bearer ${token}`);
-      navigate("/profile");
+      navigate(`/profile/${id}`);
     } catch (error) {
       handleLoginError(error, setError);
     }

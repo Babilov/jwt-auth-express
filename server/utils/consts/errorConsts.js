@@ -7,7 +7,7 @@ const errors = {
   ERROR_BAD_TOKEN: "Указан неверный токен",
   ERROR_NO_ACCESS: "У вас нет доступа к этому ресурсу",
   ERROR_EXISTS_ROLE: "Такая роль уже есть",
-  ERROR_SHORT_POST: "Пост не должен меньше 4 символов",
+  ERROR_SHORT_POST: "Пост не может быть пустым",
   ERROR_SHORT_PASSWORD: "Пароль должен быть как минимум 6 символов",
   ERROR_WRONG_LOGIN_SIZE: "Логин должен быть 4-20 символов",
   ERROR_WRONG_USER: "Вы не создатель поста",

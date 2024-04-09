@@ -1,13 +1,16 @@
 import axios from "axios";
 
-export const getPosts = async () => {
+export const getPosts = async (userId) => {
   const token = localStorage.getItem("token");
   try {
-    const posts = await axios.get(`${process.env.REACT_APP_API_URL}posts/`, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    const posts = await axios.get(
+      `${process.env.REACT_APP_API_URL}posts?id=${userId}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
     return posts["data"];
   } catch (e) {
     console.log(e);

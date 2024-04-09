@@ -8,3 +8,9 @@
 .username {
     font-weight: bold;
 }
+
+.post__buttons_group {
+    display: flex;
+    width: 13%;
+    justify-content: space-between;
+}
